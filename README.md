@@ -35,7 +35,7 @@ Rather than having to open the JavaScript console, copying the function from you
 - Create a bookmark.
   - Name the bookmark: `Show Input Textarea Select Stats` for example.
   - Set the bookmark URL to 'javascript:' + the  single line anonymized function above...
-```
-javascript:(function(){ const names = [ "input","textarea","select" ];const stats = {'all' : 0};names.forEach(function(name) {const count = document.getElementsByTagName(name).length;stats[name] = count;stats.all = stats.all + count;});alert(JSON.stringify(stats));})();
-```
+    ```
+    javascript:(function(){ const names = [ "input","textarea","select" ];const stats = {'all' : 0};names.forEach(function(name) {const count = document.getElementsByTagName(name).length;stats[name] = count;stats.all = stats.all + count;});alert(JSON.stringify(stats));})();
+    ```
 Now you can click the bookmark to execute the function on any webpage you are looking at.
