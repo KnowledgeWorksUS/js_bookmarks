@@ -190,3 +190,38 @@
     $("input[value=Edit]").click();
 })();
 
+//refresh secure request token value
+(function() {
+    const $myToken = $("[name=secureRequestToken]");
+
+    const $h1 = $("<div>");
+    $h1.text("refreshing security token...");
+    $h1.insertBefore($("body").children().first());
+
+    const $iframe = $("<iframe name='tempframe" + (new Date()).getTime() + "'>");
+    $iframe.css("width","50px");
+    $iframe.css("height","50px");
+    $h1.append($iframe);
+
+    const url = window.location.href+"";
+    const iframewin = window.open(url, $iframe.attr("name"));
+
+    const func = function() {
+        try {
+            let $div = $(iframewin.document).find("div");
+            if ($div.length < 8) {
+                setTimeout(function() {func();}, 500);
+            } else {
+                setTimeout(function() {
+                    const $iframeSecureRequestToken = $(iframewin.document).find("[name=secureRequestToken]");
+                    const iframeSecureRequestTokenValue = $iframeSecureRequestToken.val();
+                    $myToken.val(iframeSecureRequestTokenValue);
+                    $iframe.detach();
+                    $h1.detach();
+                    alert("Security Token Refreshed");
+                }, 500);
+            }
+        } catch (err) {}
+    };
+    func();
+})();
